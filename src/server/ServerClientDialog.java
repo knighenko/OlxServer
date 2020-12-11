@@ -9,14 +9,16 @@ import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class ServerClientDialog implements Runnable {
     private final Socket client;
     private static final Logger log = Logger.getLogger(ServerClientDialog.class.getName());
     private String response;
-
+    private FileHandler fh;
 
     public ServerClientDialog(Socket client) {
         this.client = client;
@@ -30,6 +32,10 @@ public class ServerClientDialog implements Runnable {
 
 
         try {
+            fh = new FileHandler("MyLogFile.log");
+            log.addHandler(fh);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
             log.log(Level.INFO, "Client connected. Time is:" + Calendar.getInstance().getTime());
             DataInputStream inputStream = new DataInputStream(client.getInputStream());
             DataOutputStream outputStream = new DataOutputStream(client.getOutputStream());
