@@ -1,6 +1,7 @@
 package server;
 
 import entity.SiteReader;
+import jdbc.PostgresDB;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -48,7 +49,7 @@ public class ServerClientDialog implements Runnable {
             outputStream.close();
             client.close();
             log.log(Level.INFO, "Closing operation! Client was disconnected! Time is: " + Calendar.getInstance().getTime());
-
+            PostgresDB.connection();
         } catch (IOException e) {
             log.log(Level.WARNING, e.getMessage());
             e.printStackTrace();
