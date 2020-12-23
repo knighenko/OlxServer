@@ -20,7 +20,7 @@ public class PostgresDB {
             connection = DriverManager
                     .getConnection(DB_URL, USER, PASS);
             log.log(Level.INFO, "Connected to Database: " + DB_URL);
-            System.out.println("Connected to Database: " + DB_URL);
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
