@@ -7,12 +7,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PostgresDB {
-    //  Database credentials
+
     private static final Logger log = Logger.getLogger(PostgresDB.class.getName());
+    //  Database credentials
     static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/mydb";
     static final String USER = "myuser";
     static final String PASS = "123";
-
+/**Create DB connection*/
     public static void connection() {
         try {
             Class.forName("org.postgresql.Driver");
