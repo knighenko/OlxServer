@@ -6,14 +6,16 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import jdbc.PostgresDB;
 
 import java.io.StringWriter;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class SiteReader {
     private final String newUrl;
     private int length;
-
+    private static final Logger log = Logger.getLogger(SiteReader.class.getName());
     private String jsonString;
 
     /**
