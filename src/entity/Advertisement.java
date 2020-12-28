@@ -44,11 +44,7 @@ public class Advertisement {
         StringBuilder stringBuffer = new StringBuilder("entity.Advertisement{");
         stringBuffer.append("title='").append(title).append('\'').append(", url='").append(url).append('\'').
                 append(", imageSrc='").append(imageSrc).append('\'').append(", description='").append(description).append('\'').append('}');
-     /*  return "entity.Advertisement{" +
-                "title='" + title + '\'' +
-                ", url='" + url + '\'' +
-                ", imageSrc='" + imageSrc + '\'' +
-                '}';*/
+
         return stringBuffer.toString();
     }
 
