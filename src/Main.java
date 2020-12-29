@@ -23,7 +23,9 @@ public class Main {
             while (!server.isClosed()){
                 Socket client=server.accept();
                 executorService.execute(new ServerClientDialog(client));
+                log.log(Level.INFO, "Execute ServerSocket");
             }
+            log.log(Level.INFO, "Done execute ServerSocket");
         } catch (IOException e) {
             log.log(Level.WARNING, e.getMessage());
             e.printStackTrace();
