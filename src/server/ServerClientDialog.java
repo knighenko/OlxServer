@@ -7,8 +7,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -49,7 +47,7 @@ public class ServerClientDialog implements Runnable {
             outputStream.close();
             client.close();
             log.log(Level.INFO, "Closing operation! Client was disconnected! Time is: " + Calendar.getInstance().getTime());
-            PostgresDB.connection();
+            PostgresDB.getConnection();
         } catch (IOException e) {
             log.log(Level.WARNING, e.getMessage());
             e.printStackTrace();
