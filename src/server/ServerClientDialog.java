@@ -24,7 +24,7 @@ public class ServerClientDialog implements Runnable {
     }
 
     /**
-     * This method gets request from clent and sends responce to him
+     * This method gets request from client and sends responce to him
      */
     @Override
     public void run() {

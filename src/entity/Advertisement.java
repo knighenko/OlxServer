@@ -38,7 +38,7 @@ public class Advertisement {
     public void setImageSrc(String imageSrc) {
         this.imageSrc = imageSrc;
     }
-
+/**Method return string - description of advertisement in JSON*/
     @Override
     public String toString() {
         StringBuilder stringBuffer = new StringBuilder("entity.Advertisement{");
