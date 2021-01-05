@@ -40,4 +40,20 @@ public class PostgresDB {
         connection.close();
         log.log(Level.INFO, "Closed connection to Database: " + DB_URL);
     }
+
+    /**
+     * Method checks current user and password in table USERS
+     * return true when current user is in the table
+     */
+    public static boolean checkUser(String user, String password) {
+        return false;
+    }
+
+    /**
+     * Method create user in table USERS
+     * return true when create
+     */
+    public static boolean createUser(String user, String password) {
+        return false;
+    }
 }
