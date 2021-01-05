@@ -56,4 +56,5 @@ public class PostgresDB {
     public static boolean createUser(String user, String password) {
         return false;
     }
+    /**Method add favourite search in table USERS*/
 }
