@@ -44,24 +44,25 @@ public class PostgresDB {
      * return true when current user is in the table
      */
     public static boolean checkUser(String user, String password) {
+        boolean flag=false;
         try {
-            Connection connection=getConnection();
-            Statement statement=connection.createStatement();
-            ResultSet rs = statement.executeQuery( "select password from Accounts where e_mail=knighenko@gmail.com" ) ;
-            while( rs.next() )
-            {
-                System.out.println( rs.getString("password") ) ;
-
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from Accounts where e_mail=" + "\'" + user + "\'");
+            while (rs.next()) {
+                System.out.println(rs.getString("password"));
+                if (password.equals(rs.getString("password")))
+                    flag= true;
             }
             statement.close();
             rs.close();
             closeConnection(connection);
-            return true;
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return false;
+        return flag;
     }
 
     /**

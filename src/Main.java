@@ -23,7 +23,8 @@ public class Main {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        /*---------------------------------------*/
+        /*---------------------------------------------------------------*/
+        System.out.println(PostgresDB.checkUser("knighenko@gmail.com", "hammer123"));
         ExecutorService executorService = Executors.newFixedThreadPool(50);
 
         try {
