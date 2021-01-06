@@ -1,9 +1,6 @@
 package jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,7 +45,18 @@ public class PostgresDB {
      */
     public static boolean checkUser(String user, String password) {
         try {
-            Statement statement=getConnection().createStatement();
+            Connection connection=getConnection();
+            Statement statement=connection.createStatement();
+            ResultSet rs = statement.executeQuery( "select password from Accounts where e_mail=knighenko@gmail.com" ) ;
+            while( rs.next() )
+            {
+                System.out.println( rs.getString("password") ) ;
+
+            }
+            statement.close();
+            rs.close();
+            closeConnection(connection);
+            return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
