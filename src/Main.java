@@ -24,7 +24,7 @@ public class Main {
             throwables.printStackTrace();
         }
         /*---------------------------------------------------------------*/
-        System.out.println(PostgresDB.checkUser("knighenko@gmail.com", "hammer123"));
+        System.out.println(PostgresDB.addSearch("urlTest2", "Test2"));
         ExecutorService executorService = Executors.newFixedThreadPool(50);
 
         try {

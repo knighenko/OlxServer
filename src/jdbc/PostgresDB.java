@@ -44,7 +44,7 @@ public class PostgresDB {
      * return true when current user is in the table
      */
     public static boolean checkUser(String user, String password) {
-        boolean flag=false;
+        boolean flag = false;
         try {
             Connection connection = getConnection();
             Statement statement = connection.createStatement();
@@ -52,7 +52,7 @@ public class PostgresDB {
             while (rs.next()) {
                 System.out.println(rs.getString("password"));
                 if (password.equals(rs.getString("password")))
-                    flag= true;
+                    flag = true;
             }
             statement.close();
             rs.close();
@@ -72,5 +72,28 @@ public class PostgresDB {
     public static boolean createUser(String user, String password) {
         return false;
     }
-    /**Method add favourite search in table USERS*/
+
+
+    /**
+     * Method add favourite search in table SEARCHLIST
+     */
+    public static boolean addSearch(String url, String title) {
+
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement("insert into SEARCHLIST (url,title) values (?,?)");
+            statement.setString(1, url);
+            statement.setString(2, title);
+            statement.executeUpdate();
+            statement.close();
+            closeConnection(connection);
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+        return false;
+    }
+
 }
