@@ -1,4 +1,4 @@
-Create table Searchlist (Id serial PRIMARY KEY,UserId Integer,  Url text, Title text, FOREIGN KEY (UserId) REFERENCES Accounts (Id) ) ;
+Create table Searchlist (Id serial PRIMARY KEY, Url text, Title text) ;
 Select * from Searchlist;
-Insert into Searchlist(userId,url,title) values (1,'https://www.olx.ua/uk/elektronika/kharkov/?search%5Bfilter_float_price%3Afrom%5D=free&search%5Bdist%5D=15', 'Электроника');
+Insert into Searchlist(url,title) values ('https://www.olx.ua/uk/elektronika/kharkov/?search%5Bfilter_float_price%3Afrom%5D=free&search%5Bdist%5D=15', 'Электроника');
 DROP table Searchlist;
