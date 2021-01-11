@@ -31,17 +31,14 @@ public class ServerClientDialog implements Runnable {
 
 
         try {
-            fh = new FileHandler("MyLogFile.log");
-            log.addHandler(fh);
-            SimpleFormatter formatter = new SimpleFormatter();
-            fh.setFormatter(formatter);
+
             log.log(Level.INFO, "Client connected. Time is:" + Calendar.getInstance().getTime());
             DataInputStream inputStream = new DataInputStream(client.getInputStream());
             DataOutputStream outputStream = new DataOutputStream(client.getOutputStream());
-            String requestUrl = inputStream.readUTF();
-            log.log(Level.INFO, "Read from client message: " + requestUrl);
-            outputStream.writeUTF(getResponse(requestUrl));
+            String requestAndroid = inputStream.readUTF();
+            log.log(Level.INFO, "Read from client message: " + requestAndroid);
 
+            outputStream.writeUTF(checkCommand(requestAndroid));
             outputStream.flush();
             inputStream.close();
             outputStream.close();
@@ -56,7 +53,24 @@ public class ServerClientDialog implements Runnable {
     }
 
     /**
-     * This method return Json string from URL
+     * This method checks what command was sent from Android
+     */
+    public String checkCommand(String requestAndroid) {
+        String responseToAndroid = "false";
+        String[] array = requestAndroid.split(":");
+        String retval = array[0];
+        switch (retval) {
+            case "1":
+                return String.valueOf(PostgresDB.checkUser(array[1], array[2]));
+            case "2":
+                break;
+        }
+        return responseToAndroid;
+    }
+
+
+    /**
+     * This method return Json string from URL - OLX url
      */
     private String getResponse(String Url) {
         SiteReader siteReader = new SiteReader(Url);

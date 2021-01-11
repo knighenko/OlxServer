@@ -50,7 +50,6 @@ public class PostgresDB {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select * from Accounts where e_mail=" + "\'" + user + "\'");
             while (rs.next()) {
-                System.out.println(rs.getString("password"));
                 if (password.equals(rs.getString("password")))
                     flag = true;
             }
