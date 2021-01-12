@@ -69,14 +69,32 @@ public class PostgresDB {
      * return true when create
      */
     public static boolean createUser(String user, String password) {
+
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement("insert into ACCOUNTS (e_mail,password) values (?,?)");
+            statement.setString(1, user);
+            statement.setString(2, password);
+            statement.executeUpdate();
+            statement.close();
+            closeConnection(connection);
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+
         return false;
     }
+
+
+
 
     /**
      * Method create table [advertisements_+{username}] for each user who will be monitoring advertisements
      */
     public static boolean createUserAdvTable(String e_mail) {
-
 
         try {
             Connection connection = getConnection();
@@ -89,6 +107,7 @@ public class PostgresDB {
             statement.executeUpdate(SQL);
             statement.close();
             closeConnection(connection);
+            return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

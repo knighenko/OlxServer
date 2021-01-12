@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
          /*Tests connection--------------------------------------------*/
-       // PostgresDB.createUserAdvTable("ssssss");
+      // PostgresDB.createUser("1","1");
         /*---------------------------------------------------------------*/
 
         ExecutorService executorService = Executors.newFixedThreadPool(50);
