@@ -4,8 +4,6 @@ import server.ServerClientDialog;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -17,12 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
          /*Tests connection--------------------------------------------*/
-        Connection connection=PostgresDB.getConnection();
-        try {
-            PostgresDB.closeConnection(connection);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+       // PostgresDB.createUserAdvTable("ssssss");
         /*---------------------------------------------------------------*/
 
         ExecutorService executorService = Executors.newFixedThreadPool(50);

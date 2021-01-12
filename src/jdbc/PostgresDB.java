@@ -72,6 +72,30 @@ public class PostgresDB {
         return false;
     }
 
+    /**
+     * Method create table [advertisements_+{username}] for each user who will be monitoring advertisements
+     */
+    public static boolean createUserAdvTable(String e_mail) {
+
+
+        try {
+            Connection connection = getConnection();
+            Statement  statement = connection.createStatement();
+            String SQL = "CREATE TABLE IF NOT EXISTS " +"advertisements_"+e_mail+
+                    "(id serial PRIMARY KEY, " +
+                    " Url text, " +
+                    "  Flag boolean)";
+
+            statement.executeUpdate(SQL);
+            statement.close();
+            closeConnection(connection);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return false;
+    }
+
 
     /**
      * Method add favourite search in table SEARCHLIST

@@ -1,4 +1,5 @@
 Create table Accounts (Id serial PRIMARY KEY, E_Mail varchar(70), Password varchar(50) ) ;
 Select * from Accounts;
 Insert into Accounts(e_mail, password) values ('knighenko@gmail.com', 'hammer123');
+Insert into Accounts(e_mail, password) values ('test', 'test');
 DROP table Accounts;

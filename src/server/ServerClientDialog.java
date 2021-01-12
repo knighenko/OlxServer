@@ -44,7 +44,7 @@ public class ServerClientDialog implements Runnable {
             outputStream.close();
             client.close();
             log.log(Level.INFO, "Closing operation! Client was disconnected! Time is: " + Calendar.getInstance().getTime());
-            PostgresDB.getConnection();
+
         } catch (IOException e) {
             log.log(Level.WARNING, e.getMessage());
             e.printStackTrace();
@@ -61,7 +61,11 @@ public class ServerClientDialog implements Runnable {
         String retval = array[0];
         switch (retval) {
             case "1":
-                return String.valueOf(PostgresDB.checkUser(array[1], array[2]));
+                try{
+                return String.valueOf(PostgresDB.checkUser(array[1], array[2]));}
+                catch (Exception e){
+                    return "false";
+                }
             case "2":
                 break;
         }
