@@ -1,6 +1,8 @@
 package jdbc;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -136,6 +138,29 @@ public class PostgresDB {
 
 
         return false;
+    }
+
+    /**
+     * Method get arrayList of SearchUrls from table SEARCHLIST
+     */
+    public static HashMap<String,String> getSearchUrls() {
+        HashMap<String,String> urlMap=new HashMap<String,String>();
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select Id, URL from Searchlist");
+            while (rs.next()) {
+               urlMap.put(rs.getString("id"),rs.getString("url"));
+            }
+            statement.close();
+            rs.close();
+            closeConnection(connection);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return urlMap;
     }
 
 }

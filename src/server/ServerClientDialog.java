@@ -16,7 +16,7 @@ import java.util.logging.SimpleFormatter;
 public class ServerClientDialog implements Runnable {
     private final Socket client;
     private static final Logger log = Logger.getLogger(ServerClientDialog.class.getName());
-    private String response;
+
     private FileHandler fh;
 
     public ServerClientDialog(Socket client) {
@@ -37,7 +37,6 @@ public class ServerClientDialog implements Runnable {
             DataOutputStream outputStream = new DataOutputStream(client.getOutputStream());
             String requestAndroid = inputStream.readUTF();
             log.log(Level.INFO, "Read from client message: " + requestAndroid);
-
             outputStream.writeUTF(checkCommand(requestAndroid));
             outputStream.flush();
             inputStream.close();
@@ -73,13 +72,5 @@ public class ServerClientDialog implements Runnable {
     }
 
 
-    /**
-     * This method return Json string from URL - OLX url
-     */
-    private String getResponse(String Url) {
-        SiteReader siteReader = new SiteReader(Url);
-        response = siteReader.getJsonString();
-        //  System.out.println("Response is "+ response);
-        return response;
-    }
+
 }

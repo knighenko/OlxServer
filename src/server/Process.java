@@ -1,0 +1,48 @@
+package server;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import entity.Advertisement;
+import entity.SiteReader;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Process {
+
+
+    /**
+     * This method return Json string from URL - OLX url
+     */
+    public static String getJsonFromUrl(String Url) {
+        SiteReader siteReader = new SiteReader(Url);
+        String response = siteReader.getJsonString();
+        //  System.out.println("Response is "+ response);
+        return response;
+    }
+
+
+    /**
+     * This method returns ArrayList of Advertisements from from String getJsonFromUrl(String Url)
+     */
+    public static ArrayList<Advertisement> getAdvertisements(String jsonString) {
+        ArrayList<Advertisement> advertisements = new ArrayList<>();
+
+        Pattern logEntry = Pattern.compile("(\\{(.*?)\\})");
+        Matcher matchPattern = logEntry.matcher(jsonString);
+
+        while (matchPattern.find()) {
+            ObjectMapper mapper = new ObjectMapper();
+            Advertisement adv = null;
+            try {
+                adv = mapper.readValue(matchPattern.group(1), Advertisement.class);
+                advertisements.add(adv);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //  System.out.println(adv);
+        }
+        return advertisements;
+    }
+}
