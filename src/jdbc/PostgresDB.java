@@ -141,6 +141,31 @@ public class PostgresDB {
     }
 
     /**
+     * Method add new advertisement in table Advertisements
+     */
+    public static boolean addAdvertisement(int id, int searchId, String url, String title, String phoneNumber) {
+
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement("insert into ADVERTISEMENTS (id, searchId, url,title, phoneNumber) values (?,?,?,?,?)");
+            statement.setInt(1, id);
+            statement.setInt(2, searchId);
+            statement.setString(3, url);
+            statement.setString(4, title);
+            statement.setString(5, phoneNumber);
+            statement.executeUpdate();
+            statement.close();
+            closeConnection(connection);
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+        return false;
+    }
+
+    /**
      * Method get arrayList of SearchUrls from table SEARCHLIST
      */
     public static HashMap<String,String> getSearchUrls() {
