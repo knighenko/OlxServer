@@ -20,13 +20,17 @@ public class Main {
 
     public static void main(String[] args) {
         /*Tests connection--------------------------------------------*/
+        int i=1;
         HashMap<String, String> searchUrls = PostgresDB.getSearchUrls();
         for (Map.Entry<String, String> pair : searchUrls.entrySet()) {
             String json = Process.getJsonFromUrl(pair.getValue());
             ArrayList<Advertisement> advertisements = Process.getAdvertisements(json);
             for (Advertisement advertisement : advertisements) {
-                System.out.print(pair.getKey());
-                System.out.println(advertisement.getDescription());
+
+                System.out.println("i= "+i);
+                System.out.println("pair= " +pair.getKey());
+              //  PostgresDB.addAdvertisement(Integer.parseInt(pair.getKey()),1,advertisement.getUrl(),advertisement.getTitle(),"+380685654215");
+                i++;
             }
         }
         /* ---------------------------------------------------------------*/
