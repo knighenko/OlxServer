@@ -1,6 +1,7 @@
 import entity.Advertisement;
 import entity.SiteReader;
 import jdbc.PostgresDB;
+import server.FillingBaseThread;
 import server.Process;
 import server.ServerClientDialog;
 
@@ -22,19 +23,8 @@ public class Main {
     public static void main(String[] args) {
         /*Tests connection--------------------------------------------*/
 
-        HashMap<String, String> searchUrls = PostgresDB.getSearchUrls();
-        for (Map.Entry<String, String> pair : searchUrls.entrySet()) {
-            String json = Process.getJsonFromUrl(pair.getValue());
-            ArrayList<Advertisement> advertisements = Process.getAdvertisements(json);
-            for (Advertisement advertisement : advertisements) {
-                    int idAdv=advertisement.getId();
-                                  if (!PostgresDB.checksAdvertisement(idAdv)) {
-                    PostgresDB.addAdvertisement(idAdv, Integer.parseInt(pair.getKey()), advertisement.getUrl(), advertisement.getTitle(), "+380685654215");
-                }
-            }
-        }
-        SiteReader reader=new SiteReader("https://www.olx.ua/uk/dom-i-sad/kharkov/?search%5Bfilter_float_price%3Afrom%5D=free&search%5Bdist%5D=15");
-        reader.getJsonString();
+        new FillingBaseThread().start();
+
         /* ---------------------------------------------------------------*/
 
         ExecutorService executorService = Executors.newFixedThreadPool(50);
