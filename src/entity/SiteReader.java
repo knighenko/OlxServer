@@ -2,10 +2,7 @@ package entity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlImage;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.*;
 import jdbc.PostgresDB;
 
 import java.io.StringWriter;
@@ -44,15 +41,18 @@ public class SiteReader {
                 // for (HtmlElement item : items) {
                 for (int i = 0; i < items.size() & i < length; i++) {
                     HtmlElement item = items.get(i);
-                    // System.out.println(item.asXml());
-
+                     //System.out.println(item.asXml());
+        /*Check does have an imgSrc?*/
                     HtmlImage element = item.getFirstByXPath(".//table/tbody/tr[1]/td[1]/a/img");
+                   DomAttr idAdv = item.getFirstByXPath(".//table[@data-id]/@data-id");
                     HtmlAnchor anchor = item.getFirstByXPath(".//table/tbody/tr[1]/td[2]/div/h3/a");
                     HtmlPage advPage = client.getPage(anchor.getHrefAttribute());
                     HtmlElement advItem = advPage.getHtmlElementById("textContent");
-
+                   // HtmlElement advId = advPage.getFirstByXPath();
+                    //System.out.println(advId.asXml());
                     if (element != null) {
                         Advertisement adv = new Advertisement();
+                        adv.setId(Integer.parseInt(idAdv.getValue()));
                         adv.setTitle(anchor.getTextContent().trim());
                         adv.setUrl(anchor.getHrefAttribute());
                         adv.setImageSrc(element.getSrcAttribute());
@@ -62,6 +62,7 @@ public class SiteReader {
 
                     } else {
                         Advertisement adv = new Advertisement();
+                        adv.setId(Integer.parseInt(idAdv.getValue()));
                         adv.setTitle(anchor.getTextContent().trim());
                         adv.setUrl(anchor.getHrefAttribute());
                         adv.setImageSrc("No Img");

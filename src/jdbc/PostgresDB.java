@@ -86,11 +86,8 @@ public class PostgresDB {
         }
 
 
-
         return false;
     }
-
-
 
 
     /**
@@ -100,8 +97,8 @@ public class PostgresDB {
 
         try {
             Connection connection = getConnection();
-            Statement  statement = connection.createStatement();
-            String SQL = "CREATE TABLE IF NOT EXISTS " +"advertisements_"+e_mail+
+            Statement statement = connection.createStatement();
+            String SQL = "CREATE TABLE IF NOT EXISTS " + "advertisements_" + e_mail +
                     "(id serial PRIMARY KEY, " +
                     " Url text, " +
                     "  Flag boolean)";
@@ -160,22 +157,43 @@ public class PostgresDB {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-
         return false;
+    }
+    /**
+     * Method checks new advertisement in table Advertisements
+     */
+    public static boolean checksAdvertisement(int idAdvertisement) {
+        boolean flag = false;
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from Advertisements where id=" + "\'" + idAdvertisement + "\'");
+
+            if (rs.next()) {
+                                  flag = true;
+            }
+            statement.close();
+            rs.close();
+            closeConnection(connection);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return flag;
     }
 
     /**
      * Method get arrayList of SearchUrls from table SEARCHLIST
      */
-    public static HashMap<String,String> getSearchUrls() {
-        HashMap<String,String> urlMap=new HashMap<String,String>();
+    public static HashMap<String, String> getSearchUrls() {
+        HashMap<String, String> urlMap = new HashMap<String, String>();
         try {
             Connection connection = getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select Id, URL from Searchlist");
             while (rs.next()) {
-               urlMap.put(rs.getString("id"),rs.getString("url"));
+                urlMap.put(rs.getString("id"), rs.getString("url"));
             }
             statement.close();
             rs.close();
