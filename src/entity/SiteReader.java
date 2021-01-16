@@ -47,16 +47,14 @@ public class SiteReader {
                    DomAttr idAdv = item.getFirstByXPath(".//table[@data-id]/@data-id");
                     HtmlAnchor anchor = item.getFirstByXPath(".//table/tbody/tr[1]/td[2]/div/h3/a");
                     HtmlPage advPage = client.getPage(anchor.getHrefAttribute());
-                    HtmlElement advItem = advPage.getHtmlElementById("textContent");
-                   // HtmlElement advId = advPage.getFirstByXPath();
-                    //System.out.println(advId.asXml());
+                    HtmlDivision advDescription = advPage.getFirstByXPath("//div[@id='textContent']");
                     if (element != null) {
                         Advertisement adv = new Advertisement();
                         adv.setId(Integer.parseInt(idAdv.getValue()));
                         adv.setTitle(anchor.getTextContent().trim());
                         adv.setUrl(anchor.getHrefAttribute());
                         adv.setImageSrc(element.getSrcAttribute());
-                        adv.setDescription(advItem.getTextContent().trim());
+                        adv.setDescription(advDescription.getTextContent().trim());
                         mapper.writeValue(writer, adv);
 
 
@@ -66,7 +64,7 @@ public class SiteReader {
                         adv.setTitle(anchor.getTextContent().trim());
                         adv.setUrl(anchor.getHrefAttribute());
                         adv.setImageSrc("No Img");
-                        adv.setDescription(advItem.getTextContent().trim());
+                        adv.setDescription(advDescription.getTextContent().trim());
                         mapper.writeValue(writer, adv);
 
                     }
