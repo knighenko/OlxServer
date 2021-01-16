@@ -1,6 +1,7 @@
 import entity.Advertisement;
 import entity.SiteReader;
 import jdbc.PostgresDB;
+import pushy.SendPush;
 import server.FillingBaseThread;
 import server.Process;
 import server.ServerClientDialog;
@@ -23,8 +24,8 @@ public class Main {
     public static void main(String[] args) {
         /*Tests connection--------------------------------------------*/
 
-        new FillingBaseThread().start();
-
+       // new FillingBaseThread().start();
+        SendPush.sendSamplePush();
         /* ---------------------------------------------------------------*/
 
         ExecutorService executorService = Executors.newFixedThreadPool(50);
