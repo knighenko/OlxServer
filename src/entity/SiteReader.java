@@ -25,7 +25,8 @@ public class SiteReader {
         } else {
             this.newUrl = url;
             length = 3;
-        } ;
+        }
+        ;
         WebClient client = new WebClient();
         client.getOptions().setCssEnabled(false);
         client.getOptions().setJavaScriptEnabled(false);
@@ -41,30 +42,34 @@ public class SiteReader {
                 // for (HtmlElement item : items) {
                 for (int i = 0; i < items.size() & i < length; i++) {
                     HtmlElement item = items.get(i);
-                     //System.out.println(item.asXml());
-        /*Check does have an imgSrc?*/
+                    //System.out.println(item.asXml());
+                    /*Check does have an imgSrc?*/
                     HtmlImage element = item.getFirstByXPath(".//table/tbody/tr[1]/td[1]/a/img");
-                   DomAttr idAdv = item.getFirstByXPath(".//table[@data-id]/@data-id");
+                    DomAttr idAdv = item.getFirstByXPath(".//table[@data-id]/@data-id");
                     HtmlAnchor anchor = item.getFirstByXPath(".//table/tbody/tr[1]/td[2]/div/h3/a");
                     HtmlPage advPage = client.getPage(anchor.getHrefAttribute());
                     HtmlDivision advDescription = advPage.getFirstByXPath("//div[@id='textContent']");
+                    Advertisement adv = new Advertisement();
+                    if (advDescription.getTextContent() != null) {
+                        adv.setDescription(advDescription.getTextContent().trim());
+                    }
+
+
                     if (element != null) {
-                        Advertisement adv = new Advertisement();
+
                         adv.setId(Integer.parseInt(idAdv.getValue()));
                         adv.setTitle(anchor.getTextContent().trim());
                         adv.setUrl(anchor.getHrefAttribute());
                         adv.setImageSrc(element.getSrcAttribute());
-                        adv.setDescription(advDescription.getTextContent().trim());
                         mapper.writeValue(writer, adv);
 
 
                     } else {
-                        Advertisement adv = new Advertisement();
+
                         adv.setId(Integer.parseInt(idAdv.getValue()));
                         adv.setTitle(anchor.getTextContent().trim());
                         adv.setUrl(anchor.getHrefAttribute());
                         adv.setImageSrc("No Img");
-                        adv.setDescription(advDescription.getTextContent().trim());
                         mapper.writeValue(writer, adv);
 
                     }

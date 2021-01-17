@@ -140,16 +140,17 @@ public class PostgresDB {
     /**
      * Method add new advertisement in table Advertisements
      */
-    public static boolean addAdvertisement(int id, int searchId, String url, String title, String phoneNumber) {
+    public static boolean addAdvertisement(int id, int searchId, String url, String title, String phoneNumber, String description) {
 
         try {
             Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement("insert into ADVERTISEMENTS (id, searchId, url,title, phoneNumber) values (?,?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("insert into ADVERTISEMENTS (olxid, searchId, url,title, phoneNumber, description) values (?,?,?,?,?,?)");
             statement.setInt(1, id);
             statement.setInt(2, searchId);
             statement.setString(3, url);
             statement.setString(4, title);
             statement.setString(5, phoneNumber);
+            statement.setString(6, description);
             statement.executeUpdate();
             statement.close();
             closeConnection(connection);
@@ -162,12 +163,12 @@ public class PostgresDB {
     /**
      * Method checks new advertisement in table Advertisements
      */
-    public static boolean checksAdvertisement(int idAdvertisement) {
+    public static boolean checksAdvertisement(String urlAdvertisement) {
         boolean flag = false;
         try {
             Connection connection = getConnection();
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select * from Advertisements where id=" + "\'" + idAdvertisement + "\'");
+            ResultSet rs = statement.executeQuery("select * from Advertisements where url=" + "\'" + urlAdvertisement + "\'");
 
             if (rs.next()) {
                                   flag = true;
