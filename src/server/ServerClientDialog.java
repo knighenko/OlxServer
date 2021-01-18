@@ -53,6 +53,8 @@ public class ServerClientDialog implements Runnable {
 
     /**
      * This method checks what command was sent from Android
+     * 1=checks user credentials
+     * 2=create user
      */
     public String checkCommand(String requestAndroid) {
         String responseToAndroid = "false";
@@ -60,17 +62,21 @@ public class ServerClientDialog implements Runnable {
         String retval = array[0];
         switch (retval) {
             case "1":
-                try{
-                return String.valueOf(PostgresDB.checkUser(array[1], array[2]));}
-                catch (Exception e){
-                    return "false";
+                try {
+                    responseToAndroid = String.valueOf(PostgresDB.checkUser(array[1], array[2]));
+                    break;
+                } catch (Exception e) {
+                    return requestAndroid;
                 }
             case "2":
+                responseToAndroid = String.valueOf(PostgresDB.createUser(array[1], array[2], array[3]));
+                break;
+            case "3":
+                responseToAndroid = String.valueOf(PostgresDB.checkPush(array[1]));
                 break;
         }
         return responseToAndroid;
     }
-
 
 
 }

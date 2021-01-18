@@ -42,15 +42,15 @@ public class PostgresDB {
     }
 
     /**
-     * Method checks current user and password in table USERS
-     * return true when current user is in the table
+     * Method checks current e_mail and password in table USERS
+     * return true when current e_mail is in the table
      */
-    public static boolean checkUser(String user, String password) {
+    public static boolean checkUser(String e_mail, String password) {
         boolean flag = false;
         try {
             Connection connection = getConnection();
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select * from Accounts where e_mail=" + "\'" + user + "\'");
+            ResultSet rs = statement.executeQuery("select * from Accounts where e_mail=" + "\'" + e_mail + "\'");
             while (rs.next()) {
                 if (password.equals(rs.getString("password")))
                     flag = true;
@@ -67,16 +67,43 @@ public class PostgresDB {
     }
 
     /**
-     * Method create user in table USERS
+     * Method checks current push from table USERS
+     * return true when current e_mail has flag true in the table
+     */
+    public static boolean checkPush(String e_mail) {
+        boolean flag = false;
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select push from Accounts where e_mail=" + "\'" + e_mail + "\'");
+            while (rs.next()) {
+                if (rs.getBoolean("push")==true)
+                    flag = true;
+            }
+            statement.close();
+            rs.close();
+            closeConnection(connection);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return flag;
+    }
+
+    /**
+     * Method create e_mail in table USERS
      * return true when create
      */
-    public static boolean createUser(String user, String password) {
+    public static boolean createUser(String e_mail, String password, String deviceToken) {
 
         try {
             Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement("insert into ACCOUNTS (e_mail,password) values (?,?)");
-            statement.setString(1, user);
+            PreparedStatement statement = connection.prepareStatement("insert into ACCOUNTS (e_mail,password,devicetoken, push) values (?,?,?,?)");
+            statement.setString(1, e_mail);
             statement.setString(2, password);
+            statement.setString(3, deviceToken);
+            statement.setBoolean(4, false);
             statement.executeUpdate();
             statement.close();
             closeConnection(connection);

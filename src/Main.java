@@ -24,8 +24,8 @@ public class Main {
     public static void main(String[] args) {
         /*Tests connection--------------------------------------------*/
 
-        new FillingBaseThread().start();
-//new SiteReader("https://www.olx.ua/uk/moda-i-stil/kharkov/?search%5Bfilter_float_price%3Afrom%5D=free&search%5Bdist%5D=15");
+       new FillingBaseThread().start();
+
         /* ---------------------------------------------------------------*/
 
         ExecutorService executorService = Executors.newFixedThreadPool(50);

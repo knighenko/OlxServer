@@ -1,7 +1,7 @@
 /**Table consists all the advertisements from site OLX*/
 
 
-Create table Advertisements (Id integer PRIMARY KEY,SearchId Integer,  Url text, Title text, PhoneNumber varchar(20), FOREIGN KEY (SearchId) REFERENCES Searchlist (Id) ) ;
+Create table Advertisements ( Id serial PRIMARY KEY,OlxId integer ,SearchId Integer,  Url varchar(250), Title text, PhoneNumber varchar(20), Description text, FOREIGN KEY (SearchId) REFERENCES Searchlist (Id) ) ;
 Select * from Advertisements;
-Insert into Advertisements(Id,SearchId,url,title) values (647899654,1,'https://www.olx.ua/uk/obyavlenie/shtany-teplye-i-top-carters-2t-trikotazh-naches-sport-reglan-IDHb5JW.html#6c614d7004', 'Штаны теплые и топ Carters 2т трикотаж+начес спорт реглан');
+Insert into Advertisements(OlxId,SearchId,url,title) values (647899654,1,'https://www.olx.ua/uk/obyavlenie/shtany-teplye-i-top-carters-2t-trikotazh-naches-sport-reglan-IDHb5JW.html#6c614d7004', 'Штаны теплые и топ Carters 2т трикотаж+начес спорт реглан');
 DROP table Advertisements;
