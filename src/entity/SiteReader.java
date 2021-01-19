@@ -48,10 +48,11 @@ public class SiteReader {
                     DomAttr idAdv = item.getFirstByXPath(".//table[@data-id]/@data-id");
                     HtmlAnchor anchor = item.getFirstByXPath(".//table/tbody/tr[1]/td[2]/div/h3/a");
                     HtmlPage advPage = client.getPage(anchor.getHrefAttribute());
-                    HtmlDivision advDescription = advPage.getFirstByXPath("//div[@id='textContent']");
+                    HtmlElement advItem = advPage.getHtmlElementById("textContent");
+                   // HtmlDivision advDescription = advPage.getFirstByXPath("//div[@id='textContent']");
                     Advertisement adv = new Advertisement();
-                    if (advDescription.getTextContent() != null) {
-                        adv.setDescription(advDescription.getTextContent().trim());
+                    if (advItem.getTextContent() != null) {
+                        adv.setDescription(advItem.getTextContent().trim());
                     }
 
 

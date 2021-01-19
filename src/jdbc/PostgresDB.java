@@ -234,4 +234,29 @@ public class PostgresDB {
         return urlMap;
     }
 
+
+    /**
+     * Method get arrayList of Devicestoken of users from table Accounts, who subscribes on Push notification
+     */
+    public static ArrayList<String> getDevicesToken() {
+        ArrayList<String> devicesToken=new ArrayList<String>();
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select devicetoken from Accounts where push='t'");
+            while (rs.next()) {
+                              devicesToken.add(rs.getString("devicetoken"));
+            }
+            statement.close();
+            rs.close();
+            closeConnection(connection);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return devicesToken;
+    }
+
+
 }

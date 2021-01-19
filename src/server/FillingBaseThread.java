@@ -23,19 +23,24 @@ public class FillingBaseThread extends Thread {
                         String urlAdv = advertisement.getUrl();
                         if (!PostgresDB.checksAdvertisement(urlAdv)) {
                             PostgresDB.addAdvertisement(advertisement.getId(), Integer.parseInt(pair.getKey()), urlAdv, advertisement.getTitle(), "+380685654215", advertisement.getDescription());
-                            /****************DELETE***********************/
-                            SendPush.sendPush(advertisement.getTitle(), advertisement.getUrl(), "2e4f84e963d35d05eeb354");
+                            /****************Send advertisement to client***********************/
+                            for (String deviceToken:   PostgresDB.getDevicesToken())
+                            SendPush.sendPush(advertisement.getTitle(), advertisement.getUrl(), deviceToken);
                             /*********************************************/
                         }
                     }
                 }
             }
+
+           /*
             try {
                 Thread.sleep(2000);
-                System.out.println("FillingBaseThread. Time is:" + ((sec - Calendar.getInstance().getTimeInMillis())/1000)+" sec");
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+           */
+            System.out.println("FillingBaseThread. Time is:" + ((sec - Calendar.getInstance().getTimeInMillis())/1000)+" sec");
         }
     }
 }

@@ -24,7 +24,8 @@ public class Main {
     public static void main(String[] args) {
         /*Tests connection--------------------------------------------*/
 
-       new FillingBaseThread().start();
+        /**Search new advertisements and send to the users*/
+            new FillingBaseThread().start();
 
         /* ---------------------------------------------------------------*/
 
