@@ -4,14 +4,16 @@ sudo service postgresql start
 /****Переключение на учетную запись postgres
 sudo -u postgres psql
 
-
+/****Новый пароль
+ALTER USER postgres PASSWORD 'newpassword';
 /****Доступ к командной строке Postgres без переключения учетных записей
 sudo -u postgres psql
 
 /***Создание новой базы данных
-createdb mydb
+CREATE USER myuser with PASSWORD '123';
+CREATE DATABASE mydb;
+GRANT ALL PRIVILEGES ON DATABASE mydb TO myuser;
 
 
-
-/****
-sudo adduser myuser
+/**************Соединение в базу данных "mydb" c пользователем "myuser"
+psql -U myuser -h localhost  -d mydb
