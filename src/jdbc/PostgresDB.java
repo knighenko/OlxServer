@@ -77,7 +77,7 @@ public class PostgresDB {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select push from Accounts where e_mail=" + "\'" + e_mail + "\'");
             while (rs.next()) {
-                if (rs.getBoolean("push")==true)
+                if (rs.getBoolean("push") == true)
                     flag = true;
             }
             statement.close();
@@ -92,11 +92,34 @@ public class PostgresDB {
     }
 
     /**
+     * Method insert current push from table USERS
+     * return true when current e_mail has flag true in the table
+     */
+    public static boolean addPush(int id, boolean flagPush) {
+        boolean flag = false;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement("update ACCOUNTS set push=? where id=?");
+            statement.setBoolean(1, flagPush);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+            statement.close();
+            closeConnection(connection);
+            flag = true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+        return flag;
+    }
+
+    /**
      * Method create e_mail in table USERS
      * return true when create
      */
     public static boolean createUser(String e_mail, String password, String deviceToken) {
-
+        boolean flag = false;
         try {
             Connection connection = getConnection();
             PreparedStatement statement = connection.prepareStatement("insert into ACCOUNTS (e_mail,password,devicetoken, push) values (?,?,?,?)");
@@ -107,13 +130,13 @@ public class PostgresDB {
             statement.executeUpdate();
             statement.close();
             closeConnection(connection);
-            return true;
+            flag = true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
 
-        return false;
+        return flag;
     }
 
 
@@ -187,6 +210,7 @@ public class PostgresDB {
         }
         return false;
     }
+
     /**
      * Method checks new advertisement in table Advertisements
      */
@@ -198,7 +222,7 @@ public class PostgresDB {
             ResultSet rs = statement.executeQuery("select * from Advertisements where url=" + "\'" + urlAdvertisement + "\'");
 
             if (rs.next()) {
-                                  flag = true;
+                flag = true;
             }
             statement.close();
             rs.close();
@@ -239,13 +263,13 @@ public class PostgresDB {
      * Method get arrayList of Devicestoken of users from table Accounts, who subscribes on Push notification
      */
     public static ArrayList<String> getDevicesToken() {
-        ArrayList<String> devicesToken=new ArrayList<String>();
+        ArrayList<String> devicesToken = new ArrayList<String>();
         try {
             Connection connection = getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select devicetoken from Accounts where push='t'");
             while (rs.next()) {
-                              devicesToken.add(rs.getString("devicetoken"));
+                devicesToken.add(rs.getString("devicetoken"));
             }
             statement.close();
             rs.close();

@@ -74,6 +74,9 @@ public class ServerClientDialog implements Runnable {
             case "3":
                 responseToAndroid = String.valueOf(PostgresDB.checkPush(array[1]));
                 break;
+            case "4":
+                responseToAndroid = String.valueOf(PostgresDB.checkPush(array[1]));
+                break;
         }
         return responseToAndroid;
     }
