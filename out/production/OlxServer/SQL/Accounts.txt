@@ -1,4 +1,0 @@
-Create table Accounts (Id serial PRIMARY KEY, E_Mail varchar(70) UNIQUE, Password varchar(50), Devicetoken varchar(40), Push boolean ) ;
-Select * from Accounts;
-Insert into Accounts(e_mail, password,devicetoken, push) values ('test', 'test', '2e4f84e963d35d05eeb354', true);
-DROP table Accounts;
