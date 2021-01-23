@@ -22,10 +22,10 @@ public class FillingBaseThread extends Thread {
                     for (Advertisement advertisement : advertisements) {
                         String urlAdv = advertisement.getUrl();
                         if (!PostgresDB.checksAdvertisement(urlAdv)) {
-                            PostgresDB.addAdvertisement(advertisement.getId(), Integer.parseInt(pair.getKey()), urlAdv, advertisement.getTitle(), "+380685654215", advertisement.getDescription());
+                            PostgresDB.addAdvertisement(advertisement.getId(), Integer.parseInt(pair.getKey()), urlAdv, advertisement.getImageSrc(), advertisement.getTitle(), "+380685654215", advertisement.getDescription());
                             /****************Send advertisement to client***********************/
                             for (String deviceToken:   PostgresDB.getDevicesToken())
-                            SendPush.sendPush(advertisement.getTitle(), advertisement.getUrl(), deviceToken);
+                            SendPush.sendPush(advertisement.getTitle(), advertisement.getUrl(),advertisement.getImageSrc(),advertisement.getDescription(), deviceToken);
                             /*********************************************/
                         }
                     }

@@ -190,17 +190,18 @@ public class PostgresDB {
     /**
      * Method add new advertisement in table Advertisements
      */
-    public static boolean addAdvertisement(int id, int searchId, String url, String title, String phoneNumber, String description) {
+    public static boolean addAdvertisement(int id, int searchId, String url, String imgSrc, String title, String phoneNumber, String description) {
 
         try {
             Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement("insert into ADVERTISEMENTS (olxid, searchId, url,title, phoneNumber, description) values (?,?,?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("insert into ADVERTISEMENTS (olxid, searchId, url, imgSrc,title, phoneNumber, description) values (?,?,?,?,?,?)");
             statement.setInt(1, id);
             statement.setInt(2, searchId);
             statement.setString(3, url);
-            statement.setString(4, title);
-            statement.setString(5, phoneNumber);
-            statement.setString(6, description);
+            statement.setString(4, imgSrc);
+            statement.setString(5, title);
+            statement.setString(6, phoneNumber);
+            statement.setString(7, description);
             statement.executeUpdate();
             statement.close();
             closeConnection(connection);
