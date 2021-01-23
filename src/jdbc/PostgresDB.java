@@ -194,7 +194,7 @@ public class PostgresDB {
 
         try {
             Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement("insert into ADVERTISEMENTS (olxid, searchId, url, imgSrc,title, phoneNumber, description) values (?,?,?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("insert into ADVERTISEMENTS (olxid, searchId, url, imgSrc,title, phoneNumber, description) values (?,?,?,?,?,?,?)");
             statement.setInt(1, id);
             statement.setInt(2, searchId);
             statement.setString(3, url);
