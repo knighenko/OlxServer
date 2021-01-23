@@ -95,13 +95,13 @@ public class PostgresDB {
      * Method insert current push from table USERS
      * return true when current e_mail has flag true in the table
      */
-    public static boolean addPush(int id, boolean flagPush) {
+    public static boolean addPush(String e_mail, String flagPush) {
         boolean flag = false;
         try {
             Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement("update ACCOUNTS set push=? where id=?");
-            statement.setBoolean(1, flagPush);
-            statement.setInt(2, id);
+            PreparedStatement statement = connection.prepareStatement("update ACCOUNTS set push=? where e_mail=?");
+            statement.setBoolean(1, Boolean.valueOf(flagPush));
+            statement.setString(2, e_mail);
             statement.executeUpdate();
             statement.close();
             closeConnection(connection);

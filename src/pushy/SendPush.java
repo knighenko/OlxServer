@@ -45,7 +45,7 @@ public class SendPush {
         }
     }
 
-    public static void sendPush(String title, String url, String deviceToken) {
+    public static void sendPush(String title, String url, String imgSrc, String description,  String deviceToken) {
         // Prepare list of target device tokens
         List<String> deviceTokens = new ArrayList<>();
 
@@ -64,6 +64,8 @@ public class SendPush {
         // Add  parameters to payload
         payload.put("title", title);
         payload.put("url", url);
+        payload.put("imgSrc", imgSrc);
+        payload.put("description", description);
 
         // iOS notification fields
         Map<String, Object> notification = new HashMap<>();

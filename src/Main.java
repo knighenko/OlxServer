@@ -25,8 +25,9 @@ public class Main {
         /*Tests connection--------------------------------------------*/
 
         /**Search new advertisements and send to the users*/
-           // new FillingBaseThread().start();
-PostgresDB.addPush(1,false);
+            new FillingBaseThread().start();
+
+
         /* ---------------------------------------------------------------*/
 
         ExecutorService executorService = Executors.newFixedThreadPool(50);

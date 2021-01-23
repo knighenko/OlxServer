@@ -48,7 +48,7 @@ public class SiteReader {
                     DomAttr idAdv = item.getFirstByXPath(".//table[@data-id]/@data-id");
                     HtmlAnchor anchor = item.getFirstByXPath(".//table/tbody/tr[1]/td[2]/div/h3/a");
                     HtmlPage advPage = client.getPage(anchor.getHrefAttribute());
-                    HtmlElement advItem = advPage.getHtmlElementById("textContent");
+                                   HtmlElement advItem = advPage.getHtmlElementById("textContent");
                    // HtmlDivision advDescription = advPage.getFirstByXPath("//div[@id='textContent']");
                     Advertisement adv = new Advertisement();
                     if (advItem.getTextContent() != null) {
