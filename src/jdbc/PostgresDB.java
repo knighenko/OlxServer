@@ -1,5 +1,7 @@
 package jdbc;
 
+import entity.Advertisement;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -234,6 +236,33 @@ public class PostgresDB {
         }
 
         return flag;
+    }
+
+    /**
+     * Method gets last 10 advertisements from the table Advertisements
+     */
+    public static ArrayList<Advertisement> getLastTenAdvertisements() {
+        ArrayList<Advertisement> advertisements = new ArrayList<Advertisement>();
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet maxId = statement.executeQuery("select max(id) from Advertisements");
+
+            while (maxId.next()) {
+                for (int i = 0; i < 10; i++) {
+                    System.out.println(maxId.getInt(1));
+                }
+            }
+            statement.close();
+            maxId.close();
+            closeConnection(connection);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return advertisements;
+
     }
 
     /**
