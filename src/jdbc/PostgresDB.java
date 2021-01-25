@@ -246,15 +246,18 @@ public class PostgresDB {
         try {
             Connection connection = getConnection();
             Statement statement = connection.createStatement();
-            ResultSet maxId = statement.executeQuery("select max(id) from Advertisements");
+            ResultSet resultSet = statement.executeQuery("select max(id) from Advertisements");
 
-            while (maxId.next()) {
+            while (resultSet.next()) {
+                int advId=resultSet.getInt(1);
+
                 for (int i = 0; i < 10; i++) {
-                    System.out.println(maxId.getInt(1));
+                    System.out.println(PostgresDB.getAdvertisementById(advId));
+                    advId--;
                 }
             }
             statement.close();
-            maxId.close();
+            resultSet.close();
             closeConnection(connection);
 
         } catch (SQLException throwables) {
@@ -262,6 +265,35 @@ public class PostgresDB {
         }
 
         return advertisements;
+
+    }
+
+    /**
+     * Method gets  advertisement from the table Advertisements by id of advertisement
+     */
+    public static Advertisement getAdvertisementById(int id) {
+        Advertisement advertisement = new Advertisement();
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from Advertisements where id=" + "\'" + id + "\'");
+
+            if (rs.next()) {
+               advertisement.setUrl(rs.getString(4));
+               advertisement.setImageSrc(rs.getString(5));
+               advertisement.setTitle(rs.getString(6));
+               advertisement.setDescription(rs.getString(8));
+
+             }
+            statement.close();
+            rs.close();
+            closeConnection(connection);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return advertisement;
 
     }
 
