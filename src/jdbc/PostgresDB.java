@@ -25,7 +25,7 @@ public class PostgresDB {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager
                     .getConnection(DB_URL, USER, PASS);
-            log.log(Level.INFO, "Connected to Database: " + DB_URL);
+           // log.log(Level.INFO, "Connected to Database: " + DB_URL);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -40,7 +40,7 @@ public class PostgresDB {
      */
     public static void closeConnection(Connection connection) throws SQLException {
         connection.close();
-        log.log(Level.INFO, "Closed connection to Database: " + DB_URL);
+       // log.log(Level.INFO, "Closed connection to Database: " + DB_URL);
     }
 
     /**
@@ -249,10 +249,10 @@ public class PostgresDB {
             ResultSet resultSet = statement.executeQuery("select max(id) from Advertisements");
 
             while (resultSet.next()) {
-                int advId=resultSet.getInt(1);
+                int advId = resultSet.getInt(1);
 
                 for (int i = 0; i < 10; i++) {
-                    System.out.println(PostgresDB.getAdvertisementById(advId));
+                    advertisements.add(PostgresDB.getAdvertisementById(advId));
                     advId--;
                 }
             }
@@ -279,12 +279,12 @@ public class PostgresDB {
             ResultSet rs = statement.executeQuery("select * from Advertisements where id=" + "\'" + id + "\'");
 
             if (rs.next()) {
-               advertisement.setUrl(rs.getString(4));
-               advertisement.setImageSrc(rs.getString(5));
-               advertisement.setTitle(rs.getString(6));
-               advertisement.setDescription(rs.getString(8));
+                advertisement.setUrl(rs.getString(4));
+                advertisement.setImageSrc(rs.getString(5));
+                advertisement.setTitle(rs.getString(6));
+                advertisement.setDescription(rs.getString(8));
 
-             }
+            }
             statement.close();
             rs.close();
             closeConnection(connection);

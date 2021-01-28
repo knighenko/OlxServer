@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -25,9 +26,12 @@ public class Main {
         /*Tests connection--------------------------------------------*/
 
         /**Search new advertisements and send to the users*/
-        //  new FillingBaseThread().start();
 
+        HashMap<String, String> searchUrls = PostgresDB.getSearchUrls();
+        for (Map.Entry<String, String> pair : searchUrls.entrySet()) {
+            new FillingBaseThread(pair.getKey(), pair.getValue()).start();
 
+        }
         /* ---------------------------------------------------------------*/
 
         ExecutorService executorService = Executors.newFixedThreadPool(50);
