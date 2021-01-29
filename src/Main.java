@@ -39,7 +39,7 @@ public class Main {
         ExecutorService executorService = Executors.newFixedThreadPool(50);
 
         try {
-            ServerSocket server = new ServerSocket(8080);
+            ServerSocket server = new ServerSocket(8079);
             while (!server.isClosed()) {
                 Socket client = server.accept();
                 executorService.execute(new ServerClientDialog(client));
