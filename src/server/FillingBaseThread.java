@@ -4,14 +4,12 @@ import entity.Advertisement;
 import jdbc.PostgresDB;
 import pushy.SendPush;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class FillingBaseThread extends Thread {
     private String url;
     private String key;
+    private Random rnd = new Random();
 
     public FillingBaseThread(String key, String url) {
         this.url = url;
@@ -19,9 +17,32 @@ public class FillingBaseThread extends Thread {
     }
 
     public void run() {
+
+
         while (true) {
             /* ------------------------------------------*/
             long sec = Calendar.getInstance().getTimeInMillis();
+            int number = rnd.nextInt(6) +7;
+            if (Calendar.getInstance().getTime().getHours() > 7 && Calendar.getInstance().getTime().getHours() < 23) {
+                try {
+                    Thread.sleep(number*1000);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    Thread.sleep(1800200+number);
+                    /* ------------------------------------------*/
+                    System.out.println("Current thread is: " + currentThread().getId() + ". Time is:" + ((sec - Calendar.getInstance().getTimeInMillis()) / 1000) + " sec");
+                    /* -----------------------------------------------*/
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            /* ------------------------------------------*/
+            System.out.println("Current thread is: " + currentThread().getId() + ". Time is: " + Calendar.getInstance().getTime() +" Stopping "+ ((sec - Calendar.getInstance().getTimeInMillis()) / 1000) + " sec");
+            /* -----------------------------------------------*/
             /* -----------------------------------------------*/
             String json = Process.getJsonFromUrl(url);
             if (json != null) {
@@ -37,14 +58,7 @@ public class FillingBaseThread extends Thread {
                     }
                 }
             }
-            try {
-                Thread.sleep(12000);
-                /* ------------------------------------------*/
-                System.out.println("Current thread is: "+currentThread().getId()+". Time is:" + ((sec - Calendar.getInstance().getTimeInMillis()) / 1000) + " sec");
-                /* -----------------------------------------------*/
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+
         }
 
     }
