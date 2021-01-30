@@ -58,7 +58,7 @@ public class SiteReader {
 
                     if (element != null) {
 
-                        adv.setId(Integer.parseInt(idAdv.getValue()));
+                        adv.setId(idAdv.getValue());
                         adv.setTitle(anchor.getTextContent().trim());
                         adv.setUrl(anchor.getHrefAttribute());
                         adv.setImageSrc(element.getSrcAttribute());
@@ -67,7 +67,7 @@ public class SiteReader {
 
                     } else {
 
-                        adv.setId(Integer.parseInt(idAdv.getValue()));
+                        adv.setId(idAdv.getValue());
                         adv.setTitle(anchor.getTextContent().trim());
                         adv.setUrl(anchor.getHrefAttribute());
                         adv.setImageSrc("No Img");

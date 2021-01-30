@@ -22,8 +22,8 @@ public class FillingBaseThread extends Thread {
         while (true) {
             /* ------------------------------------------*/
             long sec = Calendar.getInstance().getTimeInMillis();
-            int number = rnd.nextInt(6) +7;
-            if (Calendar.getInstance().getTime().getHours() > 7 && Calendar.getInstance().getTime().getHours() < 23) {
+            int number = rnd.nextInt(6) +9;
+            if (Calendar.getInstance().getTime().getHours() > 5 && Calendar.getInstance().getTime().getHours() < 21) {
                 try {
                     Thread.sleep(number*1000);
 
@@ -50,7 +50,7 @@ public class FillingBaseThread extends Thread {
                 for (Advertisement advertisement : advertisements) {
                     String urlAdv = advertisement.getUrl();
                     if (!PostgresDB.checksAdvertisement(urlAdv)) {
-                        PostgresDB.addAdvertisement(advertisement.getId(), Integer.parseInt(key), urlAdv, advertisement.getImageSrc(), advertisement.getTitle(), "+380685654215", advertisement.getDescription());
+                        PostgresDB.addAdvertisement(Integer.parseInt(advertisement.getId()), Integer.parseInt(key), urlAdv, advertisement.getImageSrc(), advertisement.getTitle(), "+380685654215", advertisement.getDescription());
                         /****************Send advertisement to client***********************/
                         for (String deviceToken : PostgresDB.getDevicesToken())
                             SendPush.sendPush(advertisement.getTitle(), advertisement.getUrl(), advertisement.getImageSrc(), advertisement.getDescription(), deviceToken);

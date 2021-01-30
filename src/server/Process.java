@@ -18,7 +18,7 @@ public class Process {
     public static String getJsonFromUrl(String Url) {
         SiteReader siteReader = new SiteReader(Url);
         String response = siteReader.getJsonString();
-        //  System.out.println("Response is "+ response);
+       //   System.out.println("Response is "+ response);
         return response;
     }
 
@@ -29,14 +29,14 @@ public class Process {
     public static ArrayList<Advertisement> getAdvertisements(String jsonString) {
         ArrayList<Advertisement> advertisements = new ArrayList<>();
 
-        Pattern logEntry = Pattern.compile("(\\{(.*?)\\})");
-        Matcher matchPattern = logEntry.matcher(jsonString);
-
+        String regEx = "\\{[^{}]*\\}";
+        Pattern logEntry = Pattern.compile(regEx);
+        Matcher matchPattern = logEntry.matcher(jsonString.replaceAll("\\s+"," "));
         while (matchPattern.find()) {
             ObjectMapper mapper = new ObjectMapper();
             Advertisement adv = null;
             try {
-                adv = mapper.readValue(matchPattern.group(1), Advertisement.class);
+                adv = mapper.readValue(matchPattern.group(), Advertisement.class);
                 advertisements.add(adv);
             } catch (IOException e) {
                 e.printStackTrace();

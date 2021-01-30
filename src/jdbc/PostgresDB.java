@@ -241,8 +241,8 @@ public class PostgresDB {
     /**
      * Method gets last 10 advertisements from the table Advertisements
      */
-    public static ArrayList<Advertisement> getLastTenAdvertisements() {
-        ArrayList<Advertisement> advertisements = new ArrayList<Advertisement>();
+    public static String getLastTenAdvertisements() {
+        StringBuffer advertisements = new StringBuffer();
         try {
             Connection connection = getConnection();
             Statement statement = connection.createStatement();
@@ -252,8 +252,9 @@ public class PostgresDB {
                 int advId = resultSet.getInt(1);
 
                 for (int i = 0; i < 10; i++) {
-                    advertisements.add(PostgresDB.getAdvertisementById(advId));
-                    advId--;
+                    advertisements.append(PostgresDB.getAdvertisementById(advId));
+                        advId--;
+
                 }
             }
             statement.close();
@@ -264,7 +265,7 @@ public class PostgresDB {
             throwables.printStackTrace();
         }
 
-        return advertisements;
+        return advertisements.toString();
 
     }
 
@@ -279,6 +280,7 @@ public class PostgresDB {
             ResultSet rs = statement.executeQuery("select * from Advertisements where id=" + "\'" + id + "\'");
 
             if (rs.next()) {
+                advertisement.setId(String.valueOf(id));
                 advertisement.setUrl(rs.getString(4));
                 advertisement.setImageSrc(rs.getString(5));
                 advertisement.setTitle(rs.getString(6));

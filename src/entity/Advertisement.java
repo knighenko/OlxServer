@@ -3,17 +3,17 @@ package entity;
 
 public class Advertisement {
 
-    private int id;
+    private String id;
     private String title;
     private String url;
     private String imageSrc;
     private String description;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -49,15 +49,19 @@ public class Advertisement {
     public void setImageSrc(String imageSrc) {
         this.imageSrc = imageSrc;
     }
-/**Method return string - description of advertisement in JSON*/
+
+    /**
+     * Method return string - description of advertisement in JSON
+     */
     @Override
     public String toString() {
-        StringBuilder stringBuffer = new StringBuilder();
-       stringBuffer.append("id='").append(id).append('\'').append(", title='").append(title).append('\'').append(", url='").append(url).append('\'').
-                append(", imageSrc='").append(imageSrc).append('\'').append(", description='").append(description).append('\'');
+        StringBuilder stringBuffer = new StringBuilder("{");
+        stringBuffer.append("\"id\":\"").append(id).append('\"').append(", \"title\":\"").append(title).append('\"').append(", \"url\":\"").append(url).append('\"').
+                append(", \"imageSrc\":\"").append(imageSrc).append('\"').append(", \"description\":\"").append(description).append('\"').append("}");
 
         return stringBuffer.toString();
     }
+
 
 
 }
