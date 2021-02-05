@@ -55,6 +55,9 @@ public class ServerClientDialog implements Runnable {
      * This method checks what command was sent from Android
      * 1=checks user credentials
      * 2=create user
+     * 3=checks push notification
+     * 4=add push notification
+     * 5=get last 10 advertisements
      */
     public String checkCommand(String requestAndroid) {
         String responseToAndroid = "false";
