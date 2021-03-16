@@ -20,16 +20,17 @@ public class Main {
     private static final Logger log = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-        /*Tests connection--------------------------------------------*/
 
-        /**Search new advertisements and send to the users*/
 
-         HashMap<String, String> searchUrls = PostgresDB.getSearchUrls();
+        /**Search new advertisements and send to the users for each url has one Tread*/
+
+       HashMap<String, String> searchUrls = PostgresDB.getSearchUrls();
          for (Map.Entry<String, String> pair : searchUrls.entrySet()) {
          new FillingBaseThread(pair.getKey(), pair.getValue()).start();
 
          }
-        /* ---------------------------------------------------------------*/
+
+
 
 
 
