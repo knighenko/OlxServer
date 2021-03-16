@@ -213,6 +213,30 @@ public class PostgresDB {
         }
         return false;
     }
+    /**
+     * Method delete advertisement from the table Advertisements
+     */
+    public static boolean deleteAdvertisement(int id, int searchId, String url, String imgSrc, String title, String phoneNumber, String description) {
+
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement("insert into ADVERTISEMENTS (olxid, searchId, url, imgSrc,title, phoneNumber, description) values (?,?,?,?,?,?,?)");
+            statement.setInt(1, id);
+            statement.setInt(2, searchId);
+            statement.setString(3, url);
+            statement.setString(4, imgSrc);
+            statement.setString(5, title);
+            statement.setString(6, phoneNumber);
+            statement.setString(7, description);
+            statement.executeUpdate();
+            statement.close();
+            closeConnection(connection);
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
 
     /**
      * Method checks new advertisement in table Advertisements
@@ -239,9 +263,9 @@ public class PostgresDB {
     }
 
     /**
-     * Method gets last 10 advertisements from the table Advertisements
+     * Method gets last 20 advertisements from the table Advertisements
      */
-    public static String getLastTenAdvertisements() {
+    public static String getLastTwentyAdvertisements() {
         StringBuffer advertisements = new StringBuffer();
         try {
             Connection connection = getConnection();
@@ -251,7 +275,7 @@ public class PostgresDB {
             while (resultSet.next()) {
                 int advId = resultSet.getInt(1);
 
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 20; i++) {
                     advertisements.append(PostgresDB.getAdvertisementById(advId));
                         advId--;
 

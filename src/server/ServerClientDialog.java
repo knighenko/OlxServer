@@ -1,6 +1,5 @@
 package server;
 
-import entity.SiteReader;
 import jdbc.PostgresDB;
 
 import java.io.DataInputStream;
@@ -11,7 +10,6 @@ import java.util.Calendar;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 public class ServerClientDialog implements Runnable {
     private final Socket client;
@@ -69,7 +67,7 @@ public class ServerClientDialog implements Runnable {
                     responseToAndroid = String.valueOf(PostgresDB.checkUser(array[1], array[2]));
                     break;
                 } catch (Exception e) {
-                    return requestAndroid;
+                    return responseToAndroid;
                 }
             case "2":
                 responseToAndroid = String.valueOf(PostgresDB.createUser(array[1], array[2], array[3]));
@@ -81,7 +79,7 @@ public class ServerClientDialog implements Runnable {
                 responseToAndroid = String.valueOf(PostgresDB.addPush(array[1],array[2]));
                 break;
             case "5":
-                responseToAndroid = PostgresDB.getLastTenAdvertisements();
+                responseToAndroid = PostgresDB.getLastTwentyAdvertisements();
                 System.out.println(responseToAndroid);
                 break;
         }
