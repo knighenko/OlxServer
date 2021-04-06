@@ -24,17 +24,16 @@ public class Main {
 
         /**Search new advertisements and send to the users for each url has one Tread*/
 
-       HashMap<String, String> searchUrls = PostgresDB.getSearchUrls();
-         for (Map.Entry<String, String> pair : searchUrls.entrySet()) {
-         new FillingBaseThread(pair.getKey(), pair.getValue()).start();
+        HashMap<String, String> searchUrls = PostgresDB.getSearchUrls();
+        for (Map.Entry<String, String> pair : searchUrls.entrySet()) {
 
-         }
-
-
-
-
-
-
+            new FillingBaseThread(pair.getKey(), pair.getValue()).start();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
 
         ExecutorService executorService = Executors.newFixedThreadPool(50);
