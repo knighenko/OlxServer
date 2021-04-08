@@ -25,7 +25,7 @@ public class PostgresDB {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager
                     .getConnection(DB_URL, USER, PASS);
-           // log.log(Level.INFO, "Connected to Database: " + DB_URL);
+            // log.log(Level.INFO, "Connected to Database: " + DB_URL);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -40,7 +40,7 @@ public class PostgresDB {
      */
     public static void closeConnection(Connection connection) throws SQLException {
         connection.close();
-       // log.log(Level.INFO, "Closed connection to Database: " + DB_URL);
+        // log.log(Level.INFO, "Closed connection to Database: " + DB_URL);
     }
 
     /**
@@ -213,6 +213,7 @@ public class PostgresDB {
         }
         return false;
     }
+
     /**
      * Method delete advertisement from the table Advertisements
      */
@@ -235,6 +236,14 @@ public class PostgresDB {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return false;
+    }
+
+    /**
+     * Method clean all advertisements from the table Advertisements
+     */
+    public static boolean cleanTableAdvertisements() {
+
         return false;
     }
 
@@ -277,7 +286,7 @@ public class PostgresDB {
 
                 for (int i = 0; i < 20; i++) {
                     advertisements.append(PostgresDB.getAdvertisementById(advId));
-                        advId--;
+                    advId--;
 
                 }
             }
