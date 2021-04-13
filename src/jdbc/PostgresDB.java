@@ -221,7 +221,7 @@ public class PostgresDB {
 
         try {
             Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement("insert into ADVERTISEMENTS (olxid, searchId, url, imgSrc,title, phoneNumber, description) values (?,?,?,?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("");
 
             statement.executeUpdate();
             statement.close();
