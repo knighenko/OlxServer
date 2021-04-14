@@ -237,7 +237,7 @@ public class PostgresDB {
      * Method clean all advertisements from the table Advertisements
      */
     public static boolean cleanTableAdvertisements() {
-
+        Connection connection = getConnection();
         return false;
     }
 
