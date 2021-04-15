@@ -42,15 +42,15 @@ public class SiteReader {
                 // for (HtmlElement item : items) {
                 for (int i = 0; i < items.size() & i < length; i++) {
                     HtmlElement item = items.get(i);
-                   // System.out.println(item.asXml());
+                    // System.out.println(item.asXml());
                     /*Check does have an imgSrc?*/
                     HtmlImage element = item.getFirstByXPath(".//table/tbody/tr[1]/td[1]/a/img");
                     DomAttr idAdv = item.getFirstByXPath(".//table[@data-id]/@data-id");
                     HtmlAnchor anchor = item.getFirstByXPath(".//table/tbody/tr[1]/td[2]/div/h3/a");
-                   // System.out.println("----------------------"+anchor+"----------------------------------------------------------------------");
+                    // System.out.println("----------------------"+anchor+"----------------------------------------------------------------------");
                     HtmlPage advPage = client.getPage(anchor.getHrefAttribute());
-                                   HtmlElement advItem = advPage.getHtmlElementById("textContent");
-                   // HtmlDivision advDescription = advPage.getFirstByXPath("//div[@id='textContent']");
+                    HtmlElement advItem = advPage.getHtmlElementById("textContent");
+                    // HtmlDivision advDescription = advPage.getFirstByXPath("//div[@id='textContent']");
                     Advertisement adv = new Advertisement();
                     if (advItem.getTextContent() != null) {
                         adv.setDescription(advItem.getTextContent().trim());

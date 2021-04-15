@@ -38,14 +38,13 @@ public class SendPush {
         try {
             // Try sending the push notification
             PushyAPI.sendPush(push);
-        }
-        catch (Exception exc) {
+        } catch (Exception exc) {
             // Error, print to console
             System.out.println(exc.toString());
         }
     }
 
-    public static void sendPush(String title, String url, String imgSrc, String description,  String deviceToken) {
+    public static void sendPush(String title, String url, String imgSrc, String description, String deviceToken) {
         // Prepare list of target device tokens
         List<String> deviceTokens = new ArrayList<>();
 
@@ -80,8 +79,7 @@ public class SendPush {
         try {
             // Try sending the push notification
             PushyAPI.sendPush(push);
-        }
-        catch (Exception exc) {
+        } catch (Exception exc) {
             // Error, print to console
             System.out.println(exc.toString());
         }

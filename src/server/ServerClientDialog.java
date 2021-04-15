@@ -76,7 +76,7 @@ public class ServerClientDialog implements Runnable {
                 responseToAndroid = String.valueOf(PostgresDB.checkPush(array[1]));
                 break;
             case "4":
-                responseToAndroid = String.valueOf(PostgresDB.addPush(array[1],array[2]));
+                responseToAndroid = String.valueOf(PostgresDB.addPush(array[1], array[2]));
                 break;
             case "5":
                 responseToAndroid = PostgresDB.getLastTwentyAdvertisements();

@@ -15,24 +15,27 @@ public class FillingBaseThread extends Thread {
         this.url = url;
         this.key = key;
     }
-/**Method run*/
+
+    /**
+     * Method run
+     */
     public void run() {
 
 
         while (true) {
             /* ------------------------------------------*/
             long sec = Calendar.getInstance().getTimeInMillis();
-            int number = rnd.nextInt(6) +10;
+            int number = rnd.nextInt(6) + 10;
             if (Calendar.getInstance().getTime().getHours() > 5 && Calendar.getInstance().getTime().getHours() < 21) {
                 try {
-                    Thread.sleep(number*1000);
+                    Thread.sleep(number * 1000);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
-                    Thread.sleep(1800200+number);
+                    Thread.sleep(1800200 + number);
                     /* ------------------------------------------*/
                     System.out.println("Current thread is: " + currentThread().getId() + ". Time is:" + ((sec - Calendar.getInstance().getTimeInMillis()) / 1000) + " sec");
                     /* -----------------------------------------------*/
@@ -41,7 +44,7 @@ public class FillingBaseThread extends Thread {
                 }
             }
             /* ------------------------------------------*/
-            System.out.println("Current thread is: " + currentThread().getId() + ". Time is: " + Calendar.getInstance().getTime() +" Stopping "+ ((sec - Calendar.getInstance().getTimeInMillis()) / 1000) + " sec");
+            System.out.println("Current thread is: " + currentThread().getId() + ". Time is: " + Calendar.getInstance().getTime() + " Stopping " + ((sec - Calendar.getInstance().getTimeInMillis()) / 1000) + " sec");
             /* -----------------------------------------------*/
             /* -----------------------------------------------*/
             String json = Process.getJsonFromUrl(url);
