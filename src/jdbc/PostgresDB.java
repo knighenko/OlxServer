@@ -238,7 +238,8 @@ public class PostgresDB {
      */
     public static boolean cleanTableAdvertisements() {
         Connection connection = getConnection();
-        PreparedStatement statement = connection.prepareStatement("");
+        //PreparedStatement statement = connection.prepareStatement("");
+        // statement.executeUpdate();
         return false;
     }
 
