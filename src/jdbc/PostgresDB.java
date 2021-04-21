@@ -36,7 +36,7 @@ public class PostgresDB {
     }
 
     /**
-     * Close DB connection
+     * Close DB connection for any connection
      */
     public static void closeConnection(Connection connection) throws SQLException {
         connection.close();
