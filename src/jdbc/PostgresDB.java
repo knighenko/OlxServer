@@ -216,6 +216,7 @@ public class PostgresDB {
 
     /**
      * Method delete advertisement from the table Advertisements
+     * need to write and implement
      */
     public static boolean deleteAdvertisement() {
 
