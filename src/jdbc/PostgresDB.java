@@ -244,7 +244,9 @@ public class PostgresDB {
         // statement.executeUpdate();
         return false;
     }
-
+/**
+ * Need to create method copyTableAdvertisements
+ */
     /**
      * Method checks new advertisement in table Advertisements
      */
