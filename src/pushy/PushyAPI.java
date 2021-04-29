@@ -10,7 +10,7 @@ import org.apache.http.util.EntityUtils;
 import org.apache.http.entity.ByteArrayEntity;
 
 import java.util.Map;
-
+/**Class for not Google android*/
 public class PushyAPI {
     public static ObjectMapper mapper = new ObjectMapper();
 
