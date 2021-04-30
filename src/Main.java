@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**Main class*/
 public class Main {
     private static final Logger log = Logger.getLogger(Main.class.getName());
 
