@@ -5,7 +5,7 @@ import jdbc.PostgresDB;
 import pushy.SendPush;
 
 import java.util.*;
-
+/**This class extends Thread, it use for each url address*/
 public class FillingBaseThread extends Thread {
     private String url;
     private String key;
