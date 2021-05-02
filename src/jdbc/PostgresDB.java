@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**Class for work with database*/
 public class PostgresDB {
 
     private static final Logger log = Logger.getLogger(PostgresDB.class.getName());
