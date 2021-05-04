@@ -8,7 +8,7 @@ import jdbc.PostgresDB;
 import java.io.StringWriter;
 import java.util.List;
 import java.util.logging.Logger;
-
+/**Class for site parsing*/
 public class SiteReader {
     private final String newUrl;
     private int length;
