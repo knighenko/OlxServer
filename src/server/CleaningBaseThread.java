@@ -1,7 +1,7 @@
 package server;
 
 import jdbc.PostgresDB;
-/**СClass for CleaningBaseThread*/
+/**Сlass for CleaningBaseThread*/
 public class CleaningBaseThread extends Thread {
     private String url;
 
