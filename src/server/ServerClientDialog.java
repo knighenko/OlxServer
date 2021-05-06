@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**Class need for client-server request and response*/
 public class ServerClientDialog implements Runnable {
     private final Socket client;
     private static final Logger log = Logger.getLogger(ServerClientDialog.class.getName());
