@@ -1,6 +1,6 @@
 package entity;
 
-
+/**This class description Advertisement*/
 public class Advertisement {
 
     private String id;
