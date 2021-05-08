@@ -1,7 +1,8 @@
 package server;
 
 import jdbc.PostgresDB;
-/**Сlass for CleaningBaseThread*/
+/**Сlass for CleaningBaseThread
+ * Need to rewrite for dump database*/
 public class CleaningBaseThread extends Thread {
     private String url;
 
