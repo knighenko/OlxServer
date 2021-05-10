@@ -249,6 +249,7 @@ public class PostgresDB {
  */
     /**
      * Method checks new advertisement in table Advertisements
+     * need to implements
      */
     public static boolean checksAdvertisement(String urlAdvertisement) {
         boolean flag = false;
