@@ -26,7 +26,7 @@ public class FillingBaseThread extends Thread {
             /* ------------------------------------------*/
             long sec = Calendar.getInstance().getTimeInMillis();
             int number = rnd.nextInt(6) + 10;
-            if (Calendar.getInstance().getTime().getHours() > 5 && Calendar.getInstance().getTime().getHours() < 21) {
+            if (Calendar.getInstance().getTime().getHours() > 5 && Calendar.getInstance().getTime().getHours() < 22) {
                 try {
                     Thread.sleep(number * 1000);
 
