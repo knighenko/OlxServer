@@ -19,6 +19,8 @@ public class SiteReader {
      * Конструктор класса с инициализацией и ЮРЛ и обьекта в виде строки Json
      */
     public SiteReader(String url) {
+
+        /* This code for Kharkov olx parser
         if (Integer.parseInt(url.substring(url.length() - 1)) == 1) {
             this.newUrl = url.substring(0, url.length() - 1);
             length = 30;
@@ -26,7 +28,13 @@ public class SiteReader {
             this.newUrl = url;
             length = 3;
         }
-        ;
+        */
+
+
+            this.newUrl = url;
+            length = 3;
+
+
         WebClient client = new WebClient();
         client.getOptions().setCssEnabled(false);
         client.getOptions().setJavaScriptEnabled(false);
@@ -54,7 +62,7 @@ public class SiteReader {
                      HtmlDivision advItemDescription = advPage.getFirstByXPath("//div[@class='css-g5mtbi-Text']");
                     //System.out.println("Description "+advItemDescription.asXml());
                     Advertisement adv = new Advertisement();
-                    if (advItemDescription.getTextContent() != null) {
+                    if ((advItemDescription.getTextContent() != null)||(advItemDescription!=null)) {
                         adv.setDescription(advItemDescription.getTextContent().trim());
                     }
 

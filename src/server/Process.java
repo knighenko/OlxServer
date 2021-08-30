@@ -36,12 +36,14 @@ public class Process {
             ObjectMapper mapper = new ObjectMapper();
             Advertisement adv = null;
             try {
+               // System.out.println(matchPattern.group());
                 adv = mapper.readValue(matchPattern.group(), Advertisement.class);
                 advertisements.add(adv);
+               // System.out.println("//////////////="+adv);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //  System.out.println(adv);
+
         }
         return advertisements;
     }
