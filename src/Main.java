@@ -24,8 +24,19 @@ public class Main {
 
         /**Search new advertisements and send to the users for each url has one Tread*/
 
-        HashMap<String, String> searchUrls = PostgresDB.getSearchUrls();
-        for (Map.Entry<String, String> pair : searchUrls.entrySet()) {
+        HashMap<String, String> searchUrlsKharkiv = PostgresDB.getSearchUrls();
+        for (Map.Entry<String, String> pair : searchUrlsKharkiv.entrySet()) {
+
+            new FillingBaseThread(pair.getKey(), pair.getValue()).start();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        HashMap<String, String> searchUrlsKyiv = PostgresDB.getSearchUrls();
+        for (Map.Entry<String, String> pair : searchUrlsKyiv.entrySet()) {
 
             new FillingBaseThread(pair.getKey(), pair.getValue()).start();
             try {

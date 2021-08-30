@@ -48,7 +48,7 @@ public class FillingBaseThread extends Thread {
             /* -----------------------------------------------*/
             /* -----------------------------------------------*/
             String json = Process.getJsonFromUrl(url);
-            System.out.println("JSON STRING is: "+ json);
+            //System.out.println("JSON STRING is: "+ json);
             if (json != null) {
                 ArrayList<Advertisement> advertisements = Process.getAdvertisements(json);
                 for (Advertisement advertisement : advertisements) {

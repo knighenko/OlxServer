@@ -30,7 +30,7 @@ public class SiteReader {
         }
         */
 
-
+ /* This code for Kyiv olx parser*/
             this.newUrl = url;
             length = 3;
 
