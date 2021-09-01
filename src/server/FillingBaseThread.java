@@ -11,7 +11,7 @@ public class FillingBaseThread extends Thread {
     private String key;
     private Random rnd = new Random();
 
-    public FillingBaseThread(String key, String url) {
+    public FillingBaseThread(String key, String url, String city) {
         this.url = url;
         this.key = key;
     }
@@ -35,7 +35,8 @@ public class FillingBaseThread extends Thread {
                 }
             } else {
                 try {
-                    Thread.sleep(1800200 + number);
+                   Thread.sleep(1800200 + number);
+
                     /* ------------------------------------------*/
                     System.out.println("Current thread is: " + currentThread().getId() + ". Time is:" + ((sec - Calendar.getInstance().getTimeInMillis()) / 1000) + " sec");
                     /* -----------------------------------------------*/

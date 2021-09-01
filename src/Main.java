@@ -23,22 +23,22 @@ public class Main {
 
 
         /**Search new advertisements and send to the users for each url has one Tread*/
-
+/*
         HashMap<String, String> searchUrlsKharkiv = PostgresDB.getSearchUrls();
         for (Map.Entry<String, String> pair : searchUrlsKharkiv.entrySet()) {
 
-            new FillingBaseThread(pair.getKey(), pair.getValue()).start();
+            new FillingBaseThread(pair.getKey(), pair.getValue(), "Харьков").start();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-        HashMap<String, String> searchUrlsKyiv = PostgresDB.getSearchUrls();
+*/
+        HashMap<String, String> searchUrlsKyiv = PostgresDB.getSearchUrlsKyiv();
         for (Map.Entry<String, String> pair : searchUrlsKyiv.entrySet()) {
 
-            new FillingBaseThread(pair.getKey(), pair.getValue()).start();
+            new FillingBaseThread(pair.getKey(), pair.getValue(), "Киев").start();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

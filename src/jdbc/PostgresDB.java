@@ -192,11 +192,11 @@ public class PostgresDB {
     /**
      * Method add new advertisement in table Advertisements
      */
-    public static boolean addAdvertisement(int id, int searchId, String url, String imgSrc, String title, String phoneNumber, String description) {
+    public static boolean addAdvertisement(int id, int searchId, String url, String imgSrc, String title, String phoneNumber, String description, String city) {
 
         try {
             Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement("insert into ADVERTISEMENTS (olxid, searchId, url, imgSrc,title, phoneNumber, description) values (?,?,?,?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("insert into ADVERTISEMENTS (olxid, searchId, url, imgSrc,title, phoneNumber, description, city) values (?,?,?,?,?,?,?,7)");
             statement.setInt(1, id);
             statement.setInt(2, searchId);
             statement.setString(3, url);
@@ -204,6 +204,7 @@ public class PostgresDB {
             statement.setString(5, title);
             statement.setString(6, phoneNumber);
             statement.setString(7, description);
+            statement.setString(8, city);
             statement.executeUpdate();
             statement.close();
             closeConnection(connection);
@@ -334,7 +335,7 @@ public class PostgresDB {
     }
 
     /**
-     * Method get arrayList of SearchUrls from table SEARCHLIST
+     * Method get arrayList of SearchUrls from table SEARCHLIST Kharjiv
      */
     public static HashMap<String, String> getSearchUrls() {
         HashMap<String, String> urlMap = new HashMap<String, String>();
@@ -355,6 +356,32 @@ public class PostgresDB {
 
         return urlMap;
     }
+
+
+    /**
+     * Method get arrayList of SearchUrls from table SEARCHLIST Kharjiv
+     */
+    public static HashMap<String, String> getSearchUrlsKyiv() {
+        HashMap<String, String> urlMap = new HashMap<String, String>();
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select Id, URL from SearchlistKyiv");
+            while (rs.next()) {
+                urlMap.put(rs.getString("id"), rs.getString("url"));
+            }
+            statement.close();
+            rs.close();
+            closeConnection(connection);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return urlMap;
+    }
+
+
 
 
     /**
